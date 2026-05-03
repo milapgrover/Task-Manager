@@ -14,11 +14,7 @@ export default function Tasks() {
 
   const loadTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/tasks", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await api.get("/tasks");
 
       setTasks(res.data);
 

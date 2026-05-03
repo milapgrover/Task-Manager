@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import axios from "axios";
+import api from "../services/api";
+
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell
@@ -27,13 +28,8 @@ export default function Dashboard() {
 
   const loadData = async () => {
     try {
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
-
-      // 🔥 FETCH DATA
-      const projectRes = await axios.get("http://localhost:8080/projects", { headers });
-      const taskRes = await axios.get("http://localhost:8080/tasks", { headers });
+      const projectRes = await api.get("/projects");
+      const taskRes = await api.get("/tasks");
 
       const projects = projectRes.data;
       const tasks = taskRes.data;

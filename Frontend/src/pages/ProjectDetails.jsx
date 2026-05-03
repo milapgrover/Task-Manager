@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import axios from "axios";
+import api from "../services/api";
 
 export default function ProjectDetails() {
 
@@ -23,8 +23,8 @@ export default function ProjectDetails() {
       Authorization: `Bearer ${token}`
     };
 
-    const projectRes = await axios.get(`http://localhost:8080/projects`, { headers });
-    const taskRes = await axios.get(`http://localhost:8080/tasks`, { headers });
+    const projectRes = await api.get("/projects");
+          const taskRes = await api.get("/tasks");
 
     const selectedProject = projectRes.data.find(p => p.id == id);
 
